@@ -1,8 +1,12 @@
 # AdvancedReactRedux project
 
-1.
+.
 
-## Available Scripts
+## Tech Used
 
-In the project directory, you can run:
-
+1. redux
+2. jester
+3. enzyme / @wojtekmaj/enzyme-adapter-react-17
+4. axios / redux promise
+5. moxios
+6. jsonplaceholder
