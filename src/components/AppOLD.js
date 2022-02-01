@@ -1,18 +1,18 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "actions";
 import CommentBox from "components/CommentBox";
 import CommentList from "components/CommentList";
 
-const App = ({ auth, changeAuth }) => {
-  const renderButton = () => {
-    //console.log(auth);
-    if (auth) {
+class App extends Component {
+  renderButton() {
+    //console.log(this.props.auth);
+    if (this.props.auth) {
       return (
         <button
           onClick={() => {
-            changeAuth(false);
+            this.props.changeAuth(false);
           }}
         >
           Sign Out
@@ -22,16 +22,16 @@ const App = ({ auth, changeAuth }) => {
       return (
         <button
           onClick={() => {
-            changeAuth(true);
+            this.props.changeAuth(true);
           }}
         >
           Sign In
         </button>
       );
     }
-  };
+  }
 
-  const renderHeader = () => {
+  renderHeader() {
     return (
       <ul>
         <li>
@@ -40,25 +40,27 @@ const App = ({ auth, changeAuth }) => {
         <li>
           <Link to="/post">Post Comment</Link>
         </li>
-        <li>{renderButton()}</li>
+        <li>{this.renderButton()}</li>
       </ul>
     );
-  };
+  }
 
-  return (
-    <div>
-      <BrowserRouter>
-        <div className="container">
-          <div>{renderHeader()}</div>
-          <Routes>
-            <Route exact path="/" element={<CommentList />} />
-            <Route path="/post" element={<CommentBox />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </div>
-  );
-};
+  render() {
+    return (
+      <div>
+        <BrowserRouter>
+          <div className="container">
+            <div>{this.renderHeader()}</div>
+            <Routes>
+              <Route exact path="/" element={<CommentList />} />
+              <Route path="/post" element={<CommentBox />} />
+            </Routes>
+          </div>
+        </BrowserRouter>
+      </div>
+    );
+  }
+}
 
 function mapStateToProps(state) {
   return { auth: state.auth };

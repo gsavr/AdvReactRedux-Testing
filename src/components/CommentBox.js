@@ -1,40 +1,56 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
+//import { useNavigate } from "react-router-dom";
 import * as actions from "actions";
+import requireAuth from "components/requireAuth";
 
-class CommentBox extends Component {
-  state = { comment: "" };
+const CommentBox = ({ fetchComments, saveComment /* auth */ }) => {
+  const [comment, setComment] = useState("");
 
-  handleChange = (e) => {
-    this.setState({ comment: e.target.value });
+  /* could use authentication here
+   let navigate = useNavigate();
+
+   useEffect(() => {
+    if (!auth) {
+      navigate("/");
+    }
+  }); */
+
+  const handleChange = (e) => {
+    setComment(e.target.value);
   };
 
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     // call action creator
-    this.props.saveComment(this.state.comment);
+    saveComment(comment);
     //Save Comment
 
     //empty out comment box
-    this.setState({ comment: "" });
+    setComment("");
   };
 
-  render() {
-    return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <h4>Add Comment</h4>
-          <textarea onChange={this.handleChange} value={this.state.comment} />
-          <div>
-            <button>Submit comment</button>
-          </div>
-        </form>
-        <button className="fetch-comments" onClick={this.props.fetchComments}>
-          Fetch Comments
-        </button>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <h4>Add Comment</h4>
+        <textarea onChange={handleChange} value={comment} />
+        <div>
+          <button>Submit comment</button>
+        </div>
+      </form>
+      <button className="fetch-comments" onClick={fetchComments}>
+        Fetch Comments
+      </button>
+    </div>
+  );
+};
 
-export default connect(null, actions)(CommentBox);
+/* function mapStateToProps(state) {
+  return { auth: state.auth };
+} */
+
+export default connect(
+  /* mapStateToProps */ null,
+  actions
+)(requireAuth(CommentBox));
