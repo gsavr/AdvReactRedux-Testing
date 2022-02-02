@@ -15,3 +15,5 @@
 
 1. react-router-dom v6
 2. redux
+3. tv4 - tiny verification
+4. json schema(.org/.net)

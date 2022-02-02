@@ -14,6 +14,8 @@ const App = ({ auth, changeAuth }) => {
           onClick={() => {
             changeAuth(false);
           }}
+          type="button"
+          className="btn btn-secondary"
         >
           Sign Out
         </button>
@@ -24,6 +26,8 @@ const App = ({ auth, changeAuth }) => {
           onClick={() => {
             changeAuth(true);
           }}
+          type="button"
+          className="btn btn-secondary"
         >
           Sign In
         </button>

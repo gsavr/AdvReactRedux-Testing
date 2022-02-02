@@ -36,10 +36,17 @@ const CommentBox = ({ fetchComments, saveComment /* auth */ }) => {
         <h4>Add Comment</h4>
         <textarea onChange={handleChange} value={comment} />
         <div>
-          <button>Submit comment</button>
+          <button type="submit" className="btn btn-secondary">
+            Submit comment
+          </button>
         </div>
       </form>
-      <button className="fetch-comments" onClick={fetchComments}>
+      <button
+        type="button"
+        style={{ margin: "6px 0px" }}
+        className="fetch-comments btn btn-secondary"
+        onClick={fetchComments}
+      >
         Fetch Comments
       </button>
     </div>
